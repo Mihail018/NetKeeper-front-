@@ -23,6 +23,7 @@
       <thead>
         <tr>
           <th>Наименование ТКО</th>
+          <th>IP-адрес</th>
           <th>Дата создания</th>
           <th>Дата ввода в эксплуатацию</th>
           <th>Местоположение</th>
@@ -34,6 +35,7 @@
       <tbody>
         <tr v-for="item in filteredData" :key="item.id">
           <td>{{ item.name }}</td>
+          <td>{{ item.ipAddress }}</td>
           <td>{{ item.creationDate }}</td>
           <td>{{ item.commissionDate }}</td>
           <td>{{ item.location }}</td>
@@ -67,7 +69,7 @@ export default {
   data() {
     return {
       searchQuery: '',
-      isSearched: false
+      isSearched: true
     };
   },
 
