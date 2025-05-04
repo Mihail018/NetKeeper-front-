@@ -12,7 +12,7 @@
       <div v-show="!scanComplete">
       Текущий адрес: {{ currentIp }}
       </div>
-      
+
     </div>
     
     <div>
@@ -209,8 +209,6 @@
       },
 
       deduplicateDevices() {
-        console.log("deduplicate вызван");
-
         const seenNames = new Set();
         const result = [];
 

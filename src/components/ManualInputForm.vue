@@ -8,6 +8,11 @@
     </div>
 
     <div class="form-group">
+      <label>IP-адрес ТКО:</label>
+      <my-pattern-input v-model="localData.ipAddress" placeholder="0.0.0.0"  />
+    </div>
+
+    <div class="form-group">
       <label>Дата создания ТКО:</label>
       <my-input v-model="localData.creationDate" type="date" class="date-input" />
     </div>
@@ -40,7 +45,6 @@
   </template>
   
   <script>
-
   export default {
     name: 'manual-input-form',
 
@@ -61,6 +65,7 @@
         localData: {
           id: null,
           name: '',
+          ipAddress: '',
           creationDate: '',
           commissionDate: '',
           location: '',
@@ -85,6 +90,7 @@
       resetForm() {
         this.localData = {
           id: this.localData.id,
+          ipAddress: '',
           name: '',
           creationDate: '',
           commissionDate: '',

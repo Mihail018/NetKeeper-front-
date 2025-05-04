@@ -10,6 +10,7 @@ import SearchIcon from "@/components/UI/LucideIcons/SearchIcon.vue";
 import HideSearchIcon from "@/components/UI/LucideIcons/HideSearchIcon.vue";
 import Navbar from "@/components/UI/Navbar.vue";
 import { RouterView } from "vue-router";
+import MyPatternInput from "@/components/UI/MyPatternInput.vue";
 
 export default [
     MyButton,
@@ -23,5 +24,6 @@ export default [
     SearchIcon,
     HideSearchIcon,
     Navbar,
-    RouterView
+    RouterView,
+    MyPatternInput
 ]
