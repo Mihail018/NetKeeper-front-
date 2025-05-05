@@ -11,6 +11,7 @@ import HideSearchIcon from "@/components/UI/LucideIcons/HideSearchIcon.vue";
 import Navbar from "@/components/UI/Navbar.vue";
 import { RouterView } from "vue-router";
 import MyPatternInput from "@/components/UI/MyPatternInput.vue";
+import AddCPUData from "@/components/UI/AddCPUData.vue";
 
 export default [
     MyButton,
@@ -25,5 +26,6 @@ export default [
     HideSearchIcon,
     Navbar,
     RouterView,
-    MyPatternInput
+    MyPatternInput,
+    AddCPUData
 ]

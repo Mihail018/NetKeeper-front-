@@ -9,7 +9,7 @@
 
     <div class="form-group">
       <label>IP-адрес ТКО:</label>
-      <my-pattern-input v-model="localData.ipAddress" placeholder="0.0.0.0"  />
+      <my-pattern-input v-model="localData.ipAddress" placeholder="_._._._"  />
     </div>
 
     <div class="form-group">
@@ -28,13 +28,13 @@
     </div>
 
     <div class="form-group">
-      <label>Количество интерфейсов ТКО:</label>
-      <my-input v-model="localData.interfacesValue" placeholder="Количество интерфейсов ТКО..." />
-    </div>
-
-    <div class="form-group">
       <label>Оперативная память ТКО (в кб):</label>
       <my-input v-model="localData.memoryRAM" type="number" min="1" step="1" placeholder="Оперативная память ТКО..." />
+    </div>
+
+    <div class="form-actions">
+      <my-button class="sub-btn">Добавить интерфейсы</my-button>
+      <my-button @click="chooseCPUDataForm" class="sub-btn">Добавить процессор</my-button>
     </div>
 
     <div class="form-actions">
@@ -42,6 +42,10 @@
       <my-button @click="resetForm">Очистить</my-button>
     </div>
     </form>
+
+    <my-dialog v-model:show="cpuDataFormVisible">
+      <add-cpu-data-form :initialCPUData="localData.cpuData" @save="saveCPUData"/>
+    </my-dialog>
   </template>
   
   <script>
@@ -70,8 +74,12 @@
           commissionDate: '',
           location: '',
           interfacesValue: null,
-          memoryRAM: null
-        }
+          memoryRAM: null,
+          interfaces: [],
+          cpuData: null
+        },
+
+        cpuDataFormVisible: false,
       };
     },
 
@@ -84,6 +92,7 @@
   
     methods: {
       submitData() {
+        this.localData.interfacesValue = this.localData.interfaces.length;
         this.$emit('create', { ...this.localData });
       },
 
@@ -96,8 +105,20 @@
           commissionDate: '',
           location: '',
           interfacesValue: null,
-          memoryRAM: null
+          memoryRAM: null,
+          interfaces: [],
+          cpuData: null,
         };
+      },
+
+      chooseCPUDataForm() {
+        this.cpuDataFormVisible = true;
+      },
+
+      saveCPUData(cpuData) {
+        this.localData.cpuData = { ...cpuData };
+        this.cpuDataFormVisible = false;
+        console.log(this.localData.cpuData);
       }
     }
   }
@@ -126,5 +147,19 @@
 
   .date-input {
     width: 25%;
+    cursor: pointer;
+  }
+
+  .sub-btn {
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+  }
+
+  .sub-btn:hover {
+    background-color: black;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-color: black;
   }
   </style>
