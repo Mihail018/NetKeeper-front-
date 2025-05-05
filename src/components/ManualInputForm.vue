@@ -9,7 +9,7 @@
 
     <div class="form-group">
       <label>IP-адрес ТКО:</label>
-      <my-pattern-input v-model="localData.ipAddress" placeholder="_._._._"  />
+      <my-pattern-input v-model="localData.ipAddress" placeholder="_._._._" maskType="ip" />
     </div>
 
     <div class="form-group">
@@ -33,8 +33,8 @@
     </div>
 
     <div class="form-actions">
-      <my-button class="sub-btn">Добавить интерфейсы</my-button>
-      <my-button @click="chooseCPUDataForm" class="sub-btn">Добавить процессор</my-button>
+      <my-button @click="showInterfacesForm" class="sub-btn">Добавить интерфейсы</my-button>
+      <my-button @click="showCPUDataForm" class="sub-btn">Добавить процессор</my-button>
     </div>
 
     <div class="form-actions">
@@ -44,7 +44,11 @@
     </form>
 
     <my-dialog v-model:show="cpuDataFormVisible">
-      <add-cpu-data-form :initialCPUData="localData.cpuData" @save="saveCPUData"/>
+      <add-cpu-data-form :initialCPUData="localData.cpuData" @save="saveCPUData" />
+    </my-dialog>
+
+    <my-dialog v-model:show="interfacesFormVisible">
+      <add-interfaces-form :initialInterfaces="localData.interfaces" @save="saveInterfaces" />
     </my-dialog>
   </template>
   
@@ -80,6 +84,7 @@
         },
 
         cpuDataFormVisible: false,
+        interfacesFormVisible: false
       };
     },
 
@@ -111,14 +116,22 @@
         };
       },
 
-      chooseCPUDataForm() {
+      showCPUDataForm() {
         this.cpuDataFormVisible = true;
       },
 
       saveCPUData(cpuData) {
         this.localData.cpuData = { ...cpuData };
         this.cpuDataFormVisible = false;
-        console.log(this.localData.cpuData);
+      },
+
+      showInterfacesForm() {
+        this.interfacesFormVisible = true;
+      },
+
+      saveInterfaces(interfaces) {
+        this.localData.interfaces = [ ...interfaces ];
+        this.interfacesFormVisible = false;
       }
     }
   }

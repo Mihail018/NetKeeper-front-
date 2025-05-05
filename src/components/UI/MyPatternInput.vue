@@ -1,6 +1,6 @@
 <template>
   <input
-    ref="ipInput"
+    ref="input"
     class="input"
     type="text"
   />
@@ -16,43 +16,64 @@ export default {
     modelValue: {
       type: String,
       default: ''
-    }
-  },
-
-  watch: {
-    modelValue(newVal) {
-      // Поддерживаем реактивность при внешнем изменении значения
-      if (this.$refs.ipInput && this.$refs.ipInput.value !== newVal) {
-        this.$refs.ipInput.value = newVal;
-      }
+    },
+    maskType: {
+      type: String,
+      default: 'ip', // 'ip' или 'mac'
+      validator: value => ['ip', 'mac'].includes(value)
     }
   },
 
   mounted() {
-    const im = new Inputmask({
-      alias: 'ip',
-      greedy: false,
-      clearIncomplete: true,
-      oncomplete: () => {
-        this.$emit('update:modelValue', this.$refs.ipInput.value);
-      },
-      onincomplete: () => {
-        this.$emit('update:modelValue', this.$refs.ipInput.value);
-      },
-      oncleared: () => {
-        this.$emit('update:modelValue', '');
+    this.applyMask(); // установить маску при монтировании
+    this.$refs.input.value = this.modelValue;
+
+    this.$refs.input.addEventListener('input', () => {
+      this.$emit('update:modelValue', this.$refs.input.value);
+    });
+  },
+
+  watch: {
+    modelValue(newVal) {
+      if (this.$refs.input && this.$refs.input.value !== newVal) {
+        this.$refs.input.value = newVal;
       }
-    });
+    }
+  },
 
-    im.mask(this.$refs.ipInput);
+  methods: {
+    applyMask() {
+      let options = {};
 
-    // Инициализировать значение
-    this.$refs.ipInput.value = this.modelValue;
+      if (this.maskType === 'ip') {
+        options = {
+          alias: 'ip',
+          greedy: false,
+          clearIncomplete: true
+        };
+      } else if (this.maskType === 'mac') {
+        options = {
+          mask: "**:**:**:**:**:**",
+          definitions: {
+            '*': {
+              validator: "[0-9A-Fa-f]",
+              casing: "upper"
+            }
+          },
+          placeholder: "_",
+          clearIncomplete: true
+        };
+      }
 
-    // Обновление вручную
-    this.$refs.ipInput.addEventListener('input', () => {
-      this.$emit('update:modelValue', this.$refs.ipInput.value);
-    });
+      const im = new Inputmask({
+        ...options,
+        oncomplete: () => this.$emit('update:modelValue', this.$refs.input.value),
+        onincomplete: () => this.$emit('update:modelValue', this.$refs.input.value),
+        oncleared: () => this.$emit('update:modelValue', '')
+      });
+
+      im.mask(this.$refs.input);
+    }
   }
 };
 </script>

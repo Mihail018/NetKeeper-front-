@@ -12,6 +12,8 @@ import Navbar from "@/components/UI/Navbar.vue";
 import { RouterView } from "vue-router";
 import MyPatternInput from "@/components/UI/MyPatternInput.vue";
 import AddCPUData from "@/components/UI/AddCPUData.vue";
+import AddInterfaces from "@/components/UI/AddInterfaces.vue";
+import MySelect from "@/components/UI/MySelect.vue";
 
 export default [
     MyButton,
@@ -27,5 +29,7 @@ export default [
     Navbar,
     RouterView,
     MyPatternInput,
-    AddCPUData
+    AddCPUData,
+    AddInterfaces,
+    MySelect
 ]
