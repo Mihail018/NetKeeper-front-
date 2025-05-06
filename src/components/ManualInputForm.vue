@@ -33,8 +33,8 @@
     </div>
 
     <div class="form-actions">
-      <my-button @click="showInterfacesForm" class="sub-btn">Добавить интерфейсы</my-button>
-      <my-button @click="showCPUDataForm" class="sub-btn">Добавить процессор</my-button>
+      <my-button @click="showInterfacesForm" class="sub-btn">{{ interfacesButtonText }}</my-button>
+      <my-button @click="showCPUDataForm" class="sub-btn">{{ cpuButtonText }}</my-button>
     </div>
 
     <div class="form-actions">
@@ -65,6 +65,16 @@
       submitText: {
         type: String,
         default: 'Отправить'
+      },
+
+      interfacesButtonText: {
+        type: String,
+        default: 'Добавить интерфейсы'
+      },
+      
+      cpuButtonText: {
+        type: String,
+        default: 'Добавить процессор'
       }
     },
 

@@ -30,6 +30,8 @@
           <th>Количество интерфейсов</th>
           <th>Оперативная память</th>
           <th v-if="showActions">Действие</th>
+          <th v-if="showMoreDetails">Интерфейсы</th>
+          <th v-if="showMoreDetails">Процессор</th>
         </tr>
       </thead>
       <tbody>
@@ -40,11 +42,13 @@
           <td>{{ item.commissionDate }}</td>
           <td>{{ item.location }}</td>
           <td>{{ item.interfacesValue }}</td>
-          <td>{{ item.memoryRAM }}</td>
+          <td>{{ item.memoryRAM }} Кб</td>
           <td v-if="showActions">
             <my-button v-if="actionType === 'edit'" @click="$emit('edit', item)">Редактировать</my-button>
             <my-button v-else-if="actionType === 'delete'" @click="$emit('delete', item.id)">Удалить</my-button>
           </td>
+          <td v-if="showMoreDetails"><my-button @click="$emit('viewInterfaces', item)">Подробности</my-button></td>
+          <td v-if="showMoreDetails"><my-button @click="$emit('viewCpuData', item)">Подробности</my-button></td>
         </tr>
       </tbody>
     </table>
@@ -60,6 +64,7 @@ export default {
   props: {
     data: Array,
     showAddButton: Boolean,
+    showMoreDetails: Boolean,
     actionType: String,
     // Связываем поиск с родительскими окнами для корректной подгрузки данных
     searchQuery: String,

@@ -14,6 +14,8 @@ import MyPatternInput from "@/components/UI/MyPatternInput.vue";
 import AddCPUData from "@/components/UI/AddCPUData.vue";
 import AddInterfaces from "@/components/UI/AddInterfaces.vue";
 import MySelect from "@/components/UI/MySelect.vue";
+import CPUDetails from "@/components/CPUDetails.vue";
+import InterfacesDetails from "@/components/InterfacesDetails.vue";
 
 export default [
     MyButton,
@@ -31,5 +33,7 @@ export default [
     MyPatternInput,
     AddCPUData,
     AddInterfaces,
-    MySelect
+    MySelect,
+    CPUDetails,
+    InterfacesDetails
 ]

@@ -12,6 +12,8 @@
         :initial-data="selectedItem"
         :submit-text="'Сохранить'"
         @create="updateDevice"
+        :interfacesButtonText="'Редактировать интерфейсы'"
+        :cpuButtonText="'Редактировать процессор'"
       />
     </my-dialog>
 

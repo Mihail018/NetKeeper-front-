@@ -5,6 +5,9 @@
       :showAddButton="true"
       @add="showInputChoiseDialog"
       v-model:searchQuery="searchQuery"
+      :showMoreDetails="true"
+      @viewInterfaces="openInterfaceDetails"
+      @viewCpuData="openCPUDetails"
     />
 
     <my-dialog v-model:show="chooseInputVisible">
@@ -13,6 +16,14 @@
 
     <my-dialog v-model:show="manualInputVisible">
       <manual-input-form :submit-text="'Подтвердить'" @create="createDevice" />
+    </my-dialog>
+
+    <my-dialog v-model:show="interfaceDetailsVisible">
+      <interfaces-details :interfaces="selectedDevice?.interfaces"  />
+    </my-dialog>
+
+    <my-dialog v-model:show="cpuDataVisible">
+      <cpu-details :cpu="selectedDevice?.cpuData"  />
     </my-dialog>
 
     <div v-intersection="loadMoreDevices"></div>
@@ -35,6 +46,10 @@ export default {
       limit: 10,
       isLoading: false,
       allPagesLoaded: false,
+
+      interfaceDetailsVisible: false,
+      cpuDataVisible: false,
+      selectedDevice: null
     };
   },
 
@@ -126,6 +141,16 @@ export default {
       this.isLoading = false;
 
       await this.fetchDeviceData();
+    },
+
+    openInterfaceDetails(device) {
+      this.selectedDevice = device;
+      this.interfaceDetailsVisible = true;
+    },
+
+    openCPUDetails(device) {
+      this.selectedDevice = device;
+      this.cpuDataVisible = true;
     }
   },
 
