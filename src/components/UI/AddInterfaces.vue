@@ -13,12 +13,12 @@
             </div>
         
           <div class="form-row">
-            <my-input v-model="iface.name" placeholder="Наименование..." />
-            <my-pattern-input v-model="iface.macAddress" placeholder="__:__:__:__:__:__" maskType="mac" />
-            <my-select v-model="iface.operStatus" type="number" min="0" max="10" placeholder="Оперативный статус..." :options="operStatuses" />
-            <my-input v-model="iface.maxPacketSize" type="number" placeholder="Макс. размер пакета (байт)..." />
-            <my-input v-model="iface.incomingTrafficVolume" type="number" placeholder="Входящий трафик (байт)..." />
-            <my-input v-model="iface.outcomingTrafficVolume" type="number" placeholder="Исходящий трафик (байт)..." />
+            <my-input v-model="iface.name" placeholder="Наименование..." title="Наименование" />
+            <my-pattern-input v-model="iface.macAddress" placeholder="__:__:__:__:__:__" maskType="mac" title="Mac-адрес" />
+            <my-select v-model="iface.operStatus" type="number" min="0" max="10" placeholder="Оперативный статус..." :options="operStatuses" title="Оперативный статус" />
+            <my-input v-model="iface.maxPacketSize" type="number" placeholder="Макс. размер пакета (байт)..." title="Максимальный размер пакета (байт)" />
+            <my-input v-model="iface.incomingTrafficVolume" type="number" placeholder="Входящий трафик (байт)..." title="Входящий трафик (байт)" />
+            <my-input v-model="iface.outcomingTrafficVolume" type="number" placeholder="Исходящий трафик (байт)..." title="Исходящий трафик (байт)" />
           </div>
         </div>
       </div>

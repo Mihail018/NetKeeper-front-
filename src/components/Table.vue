@@ -36,13 +36,13 @@
       </thead>
       <tbody>
         <tr v-for="item in filteredData" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>{{ item.ipAddress }}</td>
-          <td>{{ item.creationDate }}</td>
-          <td>{{ item.commissionDate }}</td>
-          <td>{{ item.location }}</td>
-          <td>{{ item.interfacesValue }}</td>
-          <td>{{ item.memoryRAM }} Кб</td>
+          <td title="Наименование">{{ item.name }}</td>
+          <td title="IP-адрес">{{ item.ipAddress }}</td>
+          <td title="Дата создания">{{ item.creationDate }}</td>
+          <td title="Дата ввода в эксплуатацию">{{ item.commissionDate }}</td>
+          <td title="Местоположение">{{ item.location }}</td>
+          <td title="Количество интерфейсов">{{ item.interfacesValue }}</td>
+          <td title="Оперативная память">{{ item.memoryRAM }} Кб</td>
           <td v-if="showActions">
             <my-button v-if="actionType === 'edit'" @click="$emit('edit', item)">Редактировать</my-button>
             <my-button v-else-if="actionType === 'delete'" @click="$emit('delete', item.id)">Удалить</my-button>

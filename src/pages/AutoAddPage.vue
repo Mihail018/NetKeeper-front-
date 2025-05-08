@@ -20,6 +20,9 @@
         :data="tableData"
         :showAddButton="false" 
         actionType=""
+        :showMoreDetails="true"
+        @viewInterfaces="openInterfaceDetails"
+        @viewCpuData="openCPUDetails"
       />
 
       <div style="display: flex; flex-direction: row; gap: 20px; align-items: center; margin-top: 20px;">
@@ -45,6 +48,14 @@
         :cancelBtnMessage="dialogOptions.cancelBtnMessage"
       />
     </my-dialog>
+
+    <my-dialog v-model:show="interfaceDetailsVisible">
+      <interfaces-details :interfaces="selectedDevice?.interfaces"  />
+    </my-dialog>
+
+    <my-dialog v-model:show="cpuDataVisible">
+      <cpu-details :cpu="selectedDevice?.cpuData"  />
+    </my-dialog>
 </template>
   
   <script>
@@ -66,7 +77,9 @@
           onCancel: () => {},
           confirmBtnMessage: 'Да',
           cancelBtnMessage: 'Нет'
-        }
+        },
+        interfaceDetailsVisible: false,
+        cpuDataVisible: false,
       };
     },
 
@@ -225,6 +238,16 @@
         }
 
         this.tableData = result.reverse();
+      },
+
+      openInterfaceDetails(device) {
+        this.selectedDevice = device;
+        this.interfaceDetailsVisible = true;
+      },
+
+      openCPUDetails(device) {
+        this.selectedDevice = device;
+        this.cpuDataVisible = true;
       }
     },
 
