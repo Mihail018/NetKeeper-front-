@@ -14,12 +14,12 @@
 
     <div class="form-group">
       <label>Дата создания ТКО:</label>
-      <my-input v-model="localData.creationDate" type="date" class="date-input" />
+      <my-input v-model="localData.creationDate" type="date" class="date-input" :max="today" min="1970-01-01" />
     </div>
 
     <div class="form-group">
       <label>Дата ввода в эксплуатацию ТКО:</label>
-      <my-input v-model="localData.commissionDate" type="date" class="date-input" />
+      <my-input v-model="localData.commissionDate" type="date" class="date-input" :max="today" min="1970-01-01" />
     </div>
 
     <div class="form-group">
@@ -96,7 +96,9 @@
         },
 
         cpuDataFormVisible: false,
-        interfacesFormVisible: false
+        interfacesFormVisible: false,
+
+        today: new Date().toISOString().split('T')[0]
       };
     },
 
