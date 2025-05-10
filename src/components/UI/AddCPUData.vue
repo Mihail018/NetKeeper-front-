@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent>
+    <form @submit.prevent ref="addCPUData">
       <h1>Введите характеристики процессора:</h1>
       <div class="form-group">
         <label>Количество ядер процессора:</label>
@@ -12,14 +12,17 @@
       </div>
 
       <div class="form-actions">
-        <my-button @click="$emit('save', cpuData)">Сохранить</my-button>
+        <my-button @click="submitData">Сохранить</my-button>
         <my-button @click="resetForm">Сбросить</my-button>
       </div>
     </form>
   </template>
   
   <script>
+  import { validateForm } from '@/validator/validateForm';
+
   export default {
+
     name: 'add-cpu-data-form',
 
     props: {
@@ -38,6 +41,12 @@
     methods: {
       resetForm() {
         this.cpuData = { coreCount: null, loadPercent: null };
+      },
+
+      submitData() {
+        if (!validateForm(this.$refs.addCPUData)) return;
+
+        this.$emit('save', this.cpuData);
       }
     }
   }

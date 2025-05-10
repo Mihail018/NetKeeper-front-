@@ -1,15 +1,15 @@
 <template>
-    <form @submit.prevent>
+    <form @submit.prevent ref="manualInputForm">
       <h1>Введите характеристики ТКО:</h1>
 
     <div class="form-group">
       <label>Наименование ТКО:</label>
-      <my-input v-model="localData.name" placeholder="Наименование ТКО..." />
+      <my-input v-model="localData.name" placeholder="Наименование ТКО..." required />
     </div>
 
     <div class="form-group">
       <label>IP-адрес ТКО:</label>
-      <my-pattern-input v-model="localData.ipAddress" placeholder="_._._._" maskType="ip" />
+      <my-pattern-input v-model="localData.ipAddress" placeholder="_._._._" maskType="ip" required />
     </div>
 
     <div class="form-group">
@@ -29,7 +29,7 @@
 
     <div class="form-group">
       <label>Оперативная память ТКО (в кб):</label>
-      <my-input v-model="localData.memoryRAM" type="number" min="1" step="1" placeholder="Оперативная память ТКО..." />
+      <my-input v-model="localData.memoryRAM" required type="number" min="0" step="1" max="1073741824" placeholder="Оперативная память ТКО (максимум 1 ТБ)..." />
     </div>
 
     <div class="form-actions">
@@ -53,6 +53,8 @@
   </template>
   
   <script>
+  import { validateForm } from '@/validator/validateForm';
+
   export default {
     name: 'manual-input-form',
 
@@ -107,6 +109,8 @@
   
     methods: {
       submitData() {
+        if (!validateForm(this.$refs.manualInputForm)) return;
+
         this.localData.interfacesValue = this.localData.interfaces.length;
         this.$emit('create', { ...this.localData });
       },

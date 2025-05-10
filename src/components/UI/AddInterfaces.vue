@@ -1,4 +1,5 @@
 <template>
+  <form @submit.prevent ref="addInterfaces">
     <div class="interfaces-form">
       <h1>Интерфейсы устройства</h1>
       <p class="description" v-show="interfaces.length > 0">
@@ -13,25 +14,28 @@
             </div>
         
           <div class="form-row">
-            <my-input v-model="iface.name" placeholder="Наименование..." title="Наименование" />
+            <my-input v-model="iface.name" placeholder="Наименование..." title="Наименование" required />
             <my-pattern-input v-model="iface.macAddress" placeholder="__:__:__:__:__:__" maskType="mac" title="Mac-адрес" />
-            <my-select v-model="iface.operStatus" type="number" min="0" max="10" placeholder="Оперативный статус..." :options="operStatuses" title="Оперативный статус" />
-            <my-input v-model="iface.maxPacketSize" type="number" placeholder="Макс. размер пакета (байт)..." title="Максимальный размер пакета (байт)" />
-            <my-input v-model="iface.incomingTrafficVolume" type="number" placeholder="Входящий трафик (байт)..." title="Входящий трафик (байт)" />
-            <my-input v-model="iface.outcomingTrafficVolume" type="number" placeholder="Исходящий трафик (байт)..." title="Исходящий трафик (байт)" />
+            <my-select v-model="iface.operStatus" type="number" min="0" max="7" placeholder="Оперативный статус..." :options="operStatuses" title="Оперативный статус" />
+            <my-input v-model="iface.maxPacketSize" type="number" placeholder="Макс. размер пакета (байт)..." title="Максимальный размер пакета (байт)" min="0" max="8589934592" step="1" required />
+            <my-input v-model="iface.incomingTrafficVolume" type="number" placeholder="Входящий трафик (байт)..." title="Входящий трафик (байт)" min="0" max="8589934592" step="1" required />
+            <my-input v-model="iface.outcomingTrafficVolume" type="number" placeholder="Исходящий трафик (байт)..." title="Исходящий трафик (байт)" min="0" max="8589934592" step="1" required />
           </div>
         </div>
       </div>
   
       <div class="form-actions">
         <my-button @click="addInterface">Добавить интерфейс</my-button>
-        <my-button @click="$emit('save', interfaces)">Сохранить</my-button>
+        <my-button @click="submitData">Сохранить</my-button>
         <my-button @click="resetForm">Очистить</my-button>
       </div>
     </div>
+  </form>
   </template>
   
   <script>
+  import { validateForm } from '@/validator/validateForm';
+
   export default {
     name: 'add-interfaces-form',
     props: {
@@ -43,7 +47,7 @@
     
     data() {
       return {
-        interfaces: JSON.parse(JSON.stringify(this.initialInterfaces)), // глубокая копия
+        interfaces: JSON.parse(JSON.stringify(this.initialInterfaces)), // Глубокая копия
 
         operStatuses: [
             { value: 1, label: 'up(1)', title: 'Интерфейс активен' },
@@ -76,6 +80,12 @@
       removeInterface(index) {
         this.interfaces.splice(index, 1);
       },
+
+      submitData() {
+        if (!validateForm(this.$refs.addInterfaces)) return;
+
+        this.$emit('save', this.interfaces);
+      }
     }
   }
   </script>

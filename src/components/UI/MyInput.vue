@@ -1,17 +1,22 @@
 <template>
     <input
+    v-bind="$attrs"
     :value="modelValue" 
     @input="updateInput" 
-    class="input" 
-    type="text">
+    class="input"
+    type="text"
+    >
 </template>
 
 <script>
     export default {
         name: 'my-input',
+        
         props: {
             modelValue: [String, Number]
         },
+
+        emits: ['update:modelValue'],
 
         methods: {
             updateInput(event) {
