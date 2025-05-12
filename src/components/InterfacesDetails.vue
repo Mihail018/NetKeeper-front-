@@ -19,9 +19,9 @@
               <td title="Наименование">{{ iface.name }}</td>
               <td title="Mac-адрес">{{ iface.macAddress }}</td>
               <td title="Оперативный статус интерфейса">{{ iface.operStatus }}</td>
-              <td title="Максимальный размер пакета (MTU)">{{ iface.mtu || 0 }} б</td>
-              <td title="Объем входящего трафика">{{ iface.inTraffic || 0 }} б</td>
-              <td title="Объем исходящего трафика">{{ iface.outTraffic || 0 }} б</td>
+              <td title="Максимальный размер пакета (MTU)">{{ iface.maxPacketSize || 0 }} б</td>
+              <td title="Объем входящего трафика">{{ iface.incomingTrafficVolume || 0 }} б</td>
+              <td title="Объем исходящего трафика">{{ iface.outcomingTrafficVolume || 0 }} б</td>
             </tr>
           </tbody>
         </table>
