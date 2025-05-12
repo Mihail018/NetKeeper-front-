@@ -1,10 +1,27 @@
 <template>
-  <form @submit.prevent ref="registration">
-    <my-input v-model="username" placeholder="Введите логин..." required />
-    <my-input v-model="password" type="password" placeholder="Введите пароль..." required />
-    <my-input v-model="confirmPassword" type="password" placeholder="Подтвердите пароль..." required />
-    <my-button @click="registration">Зарегистрироваться</my-button>
-  </form>
+  <div class="login-container">
+    <form @submit.prevent ref="registration" class="login-form">
+      <h2>Регистрация</h2>
+
+      <label for="username">Логин:</label>
+      <div class="input-wrapper">
+        <my-input v-model="username" placeholder="Введите логин..." required />
+      </div>
+
+      <label for="username">Пароль:</label>
+      <div class="input-wrapper">
+        <my-input v-model="password" type="password" placeholder="Введите пароль..." required />
+      </div>
+
+      <label for="username">Повторите пароль:</label>
+      <div class="input-wrapper">
+        <my-input v-model="confirmPassword" type="password" placeholder="Подтвердите пароль..." required />
+      </div>
+
+      <my-button style="width: 100%;" @click="registration">Регистрация</my-button>
+      <my-button style="width: 100%;" @click="this.$router.push('/login')">Назад</my-button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -46,3 +63,55 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: #f9f9f9;
+  padding: 0 20px; /* Добавляем отступы по бокам контейнера */
+}
+
+.login-form {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Задаём форму на 100% ширины */
+  max-width: 400px; /* Максимальная ширина формы, чтобы она не была слишком широкой */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 32px;
+  color: #333;
+}
+
+.login-form label {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: -8px;
+  color: #555;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; /* Ширина группы кнопок на 100% */
+}
+
+.input-wrapper,
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+</style>
