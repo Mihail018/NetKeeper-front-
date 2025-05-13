@@ -5,6 +5,8 @@ import MainPage from "@/pages/MainPage.vue";
 import RegistrationPage from "@/pages/RegistrationPage.vue";
 import ShowDevicePage from "@/pages/ShowDevicePage.vue";
 import UpdateDevicePage from "@/pages/UpdateDevicePage.vue";
+import AboutPage from "@/pages/AboutPage.vue";
+import ReferenceMaterialsPage from "@/pages/ReferenceMaterialsPage.vue"
 import { createRouter, createWebHistory } from "vue-router";
 import axios from "axios";
 
@@ -36,18 +38,36 @@ const routes = [
     {
         path: '/login',
         component: LoginPage
+    },
+    {
+        path: '/about',
+        component: AboutPage
+    },
+    {
+        path: '/referenceMaterials',
+        component: ReferenceMaterialsPage
     }
 ]
 
 const router = createRouter({
     routes,
-    history: createWebHistory(process.env.BASE_URL)
-})
+    history: createWebHistory(process.env.BASE_URL),
+    // Для возвращения в наивысшую точку окна при переходе на другую страницу 
+    scrollBehavior(to, from, savedPosition) {
+        if (to.hash) {
+            return {
+                el: to.hash,
+                behavior: 'smooth',
+            };
+        }
+        return { top: 0 };
+    }
+});
 
 // Security
 
 // Список маршрутов, доступных без авторизации
-const publicPages = ['/', '/login', '/registration'];
+const publicPages = ['/', '/login', '/registration', '/about', '/referenceMaterials'];
 
 // Навигационный guard
 router.beforeEach(async (to, from, next) => {

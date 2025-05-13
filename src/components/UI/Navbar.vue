@@ -4,8 +4,9 @@
     <my-button @click="$router.push('/data')">Просмотр и добавление ТКО</my-button>
     <my-button @click="$router.push('/updateData')">Редактирование характеристик ТКО</my-button>
     <my-button @click="$router.push('/deleteData')">Удаление ТКО</my-button>
+    <my-button @click="$router.push('/about')">О нас</my-button>
+    <my-button @click="$router.push('/referenceMaterials')">Справка</my-button>
     
-    <!-- Показываем кнопки в зависимости от статуса -->
     <my-button v-if="!isAuthenticated" @click="$router.push('/login')">Войти</my-button>
     <my-button v-else @click="logout">Выйти</my-button>
   </div>
