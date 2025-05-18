@@ -21,6 +21,7 @@ import UserWidget from "@/components/UI/LucideIcons/UserWidget.vue";
 import ChangeLogin from "@/components/ChangeLogin.vue";
 import OldPassword from "@/components/OldPassword.vue";
 import ChangePassword from "@/components/ChangePassword.vue";
+import DeleteUser from "@/components/DeleteUser.vue";
 
 export default [
     MyButton,
@@ -46,4 +47,5 @@ export default [
     ChangeLogin,
     OldPassword,
     ChangePassword,
+    DeleteUser
 ]

@@ -30,6 +30,10 @@
     <my-dialog v-model:show="passwordDialogVisible">
       <change-password  @submit="handleNewPassword" />
     </my-dialog>
+
+    <my-dialog v-model:show="deleteDialogVisible">
+      <delete-user @confirm="handleDeleteAccount" @close="this.deleteDialogVisible = false" />
+    </my-dialog>
   </div>
 </template>
 
@@ -45,7 +49,7 @@ export default {
       loginDialogVisible: false,
       oldPasswordDialogVisible: false,
       passwordDialogVisible: false,
-      deleteDialogVisivle: false
+      deleteDialogVisible: false
     };
   },
 
@@ -117,6 +121,21 @@ export default {
         }
         catch (error) {
             alert(error.response?.data || "Ошибка при изменении пароля");
+        }
+    },
+
+    deleteAccount() {
+        this.deleteDialogVisible = true;
+    },
+
+    async handleDeleteAccount() {
+        try {
+            await axios.delete('/api/user/delete');
+            alert('Аккаунт успешно удален!');
+            this.$router.push("/login");
+        }
+        catch (error) {
+            alert(error.response?.data || 'Ошибка при удалении аккаунта');
         }
     }
   },
