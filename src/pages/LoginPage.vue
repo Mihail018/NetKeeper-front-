@@ -3,6 +3,8 @@
     <form @submit.prevent ref="login" class="login-form">
       <h2>Вход</h2>
 
+      <UserWidget />
+
       <label for="username">Логин:</label>
       <div class="input-wrapper">
         <my-input v-model="username" placeholder="Введите логин..." required />
@@ -77,20 +79,20 @@ export default {
 .login-form {
   background: white;
   border: 1px solid #ddd;
-  padding: 30px;
+  padding: 16px 24px 24px;
   border-radius: 10px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   width: 100%; /* Задаём форму на 100% ширины */
   max-width: 400px; /* Максимальная ширина формы, чтобы она не была слишком широкой */
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .login-form h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 32px;
+  margin: 0 0 10px 0;
+  font-size: 28px;
   color: #333;
 }
 

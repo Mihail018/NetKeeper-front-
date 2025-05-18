@@ -16,6 +16,8 @@ import AddInterfaces from "@/components/UI/AddInterfaces.vue";
 import MySelect from "@/components/UI/MySelect.vue";
 import CPUDetails from "@/components/CPUDetails.vue";
 import InterfacesDetails from "@/components/InterfacesDetails.vue";
+import UserIcon from "@/components/UI/LucideIcons/UserIcon.vue";
+import UserWidget from "@/components/UI/LucideIcons/UserWidget.vue";
 
 export default [
     MyButton,
@@ -35,5 +37,7 @@ export default [
     AddInterfaces,
     MySelect,
     CPUDetails,
-    InterfacesDetails
+    InterfacesDetails,
+    UserIcon,
+    UserWidget
 ]
