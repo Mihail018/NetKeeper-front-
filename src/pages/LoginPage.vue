@@ -18,7 +18,10 @@
           <my-button style="width: 100%;" @click="login">Войти</my-button>
         </div>
         <div class="button-wrapper">
-          <my-button style="width: 100%;" @click="this.$router.push('/registration')">Зарегистрироваться</my-button>
+          <my-button 
+          style="width: 100%;" 
+          @click="this.$router.push({ path: '/registration', query: { redirect: this.$route.query.redirect } })">Зарегистрироваться
+          </my-button>
         </div>
       </div>
     </form>
@@ -47,9 +50,11 @@ export default {
             username: this.username,
             password: this.password,
             });
-
+          
+            // Получаем путь редиректа
+            const redirectPath = this.$route.query.redirect || '/';
             alert(response.data);
-            this.$router.push('/');
+            this.$router.push(redirectPath);
       } 
       catch (error) {
         alert(error.response.data);

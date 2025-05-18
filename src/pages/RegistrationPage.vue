@@ -19,7 +19,9 @@
       </div>
 
       <my-button style="width: 100%;" @click="registration">Регистрация</my-button>
-      <my-button style="width: 100%;" @click="this.$router.push('/login')">Назад</my-button>
+      <my-button 
+      style="width: 100%;" 
+      @click="this.$router.push({ path: '/login', query: { redirect: this.$route.query.redirect } })">Назад</my-button>
     </form>
   </div>
 </template>
@@ -49,8 +51,10 @@ export default {
             password: this.password,
             });
 
+            // Получаем путь редиректа
+            const redirectPath = this.$route.query.redirect || '/';
             alert(response.data);
-            this.$router.push('/');
+            this.$router.push(redirectPath);
         }
         else {
             alert('Введенные пароли не совпадают!');

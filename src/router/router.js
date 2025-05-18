@@ -83,7 +83,8 @@ router.beforeEach(async (to, from, next) => {
         next(); // Авторизован
     } 
     catch (error) {
-        next('/login'); // Не авторизован — редирект на логин
+        // Запоминаем страницу, на которую кликнул пользователь
+        next({ path: '/login', query: { redirect: to.fullPath } }); // Не авторизован — редирект на логин
     }
 });
 
