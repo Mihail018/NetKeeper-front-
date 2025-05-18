@@ -18,6 +18,9 @@ import CPUDetails from "@/components/CPUDetails.vue";
 import InterfacesDetails from "@/components/InterfacesDetails.vue";
 import UserIcon from "@/components/UI/LucideIcons/UserIcon.vue";
 import UserWidget from "@/components/UI/LucideIcons/UserWidget.vue";
+import ChangeLogin from "@/components/ChangeLogin.vue";
+import OldPassword from "@/components/OldPassword.vue";
+import ChangePassword from "@/components/ChangePassword.vue";
 
 export default [
     MyButton,
@@ -39,5 +42,8 @@ export default [
     CPUDetails,
     InterfacesDetails,
     UserIcon,
-    UserWidget
+    UserWidget,
+    ChangeLogin,
+    OldPassword,
+    ChangePassword,
 ]

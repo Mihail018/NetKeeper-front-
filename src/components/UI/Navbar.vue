@@ -33,7 +33,6 @@
 
 <script>
 import axios from 'axios';
-import UserIcon from './LucideIcons/UserIcon.vue';
 
 export default {
   name: 'navbar',
@@ -73,8 +72,8 @@ export default {
     },
 
     goToProfile() {
-      this.$router.push('/user');
       this.dropdownOpen = false;
+      this.$router.push('/profile');
     },
 
     async logout() {

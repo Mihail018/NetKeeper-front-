@@ -7,6 +7,7 @@ import ShowDevicePage from "@/pages/ShowDevicePage.vue";
 import UpdateDevicePage from "@/pages/UpdateDevicePage.vue";
 import AboutPage from "@/pages/AboutPage.vue";
 import ReferenceMaterialsPage from "@/pages/ReferenceMaterialsPage.vue"
+import UserPage from "@/pages/UserPage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import axios from "axios";
 
@@ -46,6 +47,10 @@ const routes = [
     {
         path: '/referenceMaterials',
         component: ReferenceMaterialsPage
+    },
+    {
+        path: '/profile',
+        component: UserPage
     }
 ]
 
