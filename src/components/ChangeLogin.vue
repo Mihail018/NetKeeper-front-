@@ -1,13 +1,19 @@
 <template>
-  <form class="form" ref="changeLogin" @submit.prevent>
-    <h1 class="title">Введите новое имя пользователя</h1>
+  <form @submit.prevent class="form-container" ref="changeLogin">
+    <h2 class="form-title">Введите новое имя пользователя</h2>
 
-    <my-input style="width: 90%;"
-      v-model="newUsername"
-      placeholder="Новое имя пользователя"
-      required
-    />
-    <my-button @click="submitUsername">Подтвердить</my-button>
+    <div class="input-wrapper">
+      <my-input
+        v-model="newUsername"
+        placeholder="Новое имя пользователя"
+        required
+        class="input-field"
+      />
+    </div>
+
+    <div class="button-wrapper">
+      <my-button class="confirm-btn" @click="submitUsername">Подтвердить</my-button>
+    </div>
   </form>
 </template>
 
@@ -34,17 +40,44 @@ export default {
 </script>
 
 <style scoped>
-.form {
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.form-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.input-wrapper {
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.button-wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-top: 20px;
   width: 100%;
-  max-width: 300px;
-}
-
-.title {
-  font-size: 18px;
-  margin: 0 0 8px;
-  color: #333;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 </style>
