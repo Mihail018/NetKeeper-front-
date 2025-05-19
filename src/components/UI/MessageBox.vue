@@ -1,8 +1,10 @@
 <template>
-    <form @submit.prevent>
-      <h4>{{ message }}</h4>
-      <my-button class="confirm-btn" @click="onConfirm">{{ confirmBtnMessage }}</my-button>
-      <my-button class="cancel-btn" @click="onCancel">{{ cancelBtnMessage }}</my-button>
+    <form @submit.prevent class="form-container">
+      <h2>{{ message }}</h2>
+      <div class="button-wrapper">
+        <my-button @click="onConfirm">{{ confirmBtnMessage }}</my-button>
+        <my-button @click="onCancel">{{ cancelBtnMessage }}</my-button>
+      </div>
     </form>
   </template>
   
@@ -39,8 +41,25 @@
   </script>
   
   <style scoped>
-  .confirm-btn,
-  .cancel-btn {
-    margin-right: 10px;
-  }
-  </style>
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.button-wrapper my-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+</style>

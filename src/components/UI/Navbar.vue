@@ -1,12 +1,12 @@
 <template>
   <div class="navbar">
     <div class="nav-center">
-      <my-button @click="$router.push('/')">Главная</my-button>
-      <my-button @click="$router.push('/data')">Просмотр и добавление ТКО</my-button>
-      <my-button @click="$router.push('/updateData')">Редактирование характеристик ТКО</my-button>
-      <my-button @click="$router.push('/deleteData')">Удаление ТКО</my-button>
-      <my-button @click="$router.push('/about')">О нас</my-button>
-      <my-button @click="$router.push('/referenceMaterials')">Справка</my-button>
+      <my-button class="nav-btn" @click="$router.push('/')">Главная</my-button>
+      <my-button class="nav-btn" @click="$router.push('/data')">Просмотр и добавление ТКО</my-button>
+      <my-button class="nav-btn" @click="$router.push('/updateData')">Редактирование характеристик ТКО</my-button>
+      <my-button class="nav-btn" @click="$router.push('/deleteData')">Удаление ТКО</my-button>
+      <my-button class="nav-btn" @click="$router.push('/about')">О нас</my-button>
+      <my-button class="nav-btn" @click="$router.push('/referenceMaterials')">Справка</my-button>
     </div>
 
     <!-- Неавторизованный пользователь -->
@@ -95,15 +95,41 @@ export default {
 .navbar {
   position: sticky;
   top: 0;
-  background: white;
-  padding: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #022236;
+  padding: 12px 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   z-index: 100;
   display: flex;
   justify-content: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
+.nav-center {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+/* Кнопки */
+.nav-btn {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff33;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #ffffff22;
+  border-color: #ffffff66;
+  color: #ffffff;
+}
+
+/* Иконка входа/профиля */
 .auth-button {
   background: none;
   border: none;
@@ -114,15 +140,15 @@ export default {
   height: 48px;
   width: 48px;
   padding: 0;
+  color: white;
   transition: background-color 0.3s ease;
 }
 
 .auth-button:hover {
-  background-color: rgba(59, 130, 246, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
 }
 
-/* Стили для выпадающего списка */
 .auth-dropdown {
   position: relative;
 }
@@ -157,13 +183,6 @@ export default {
   color: #1d4ed8;
 }
 
-.nav-center {
-  display: flex;
-  gap: 10px;
-  margin: 0 auto;
-}
-
-/* Анимация появления выпадающего списка */
 @keyframes fadeIn {
   from {
     opacity: 0;

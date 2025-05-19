@@ -14,7 +14,7 @@ defineOptions({
 .user-icon {
     width: 40px;
     height: 40px;
-    color: black;
+    color: #ffffff;
     cursor: pointer;
 }
 </style>

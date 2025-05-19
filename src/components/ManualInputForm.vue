@@ -18,8 +18,14 @@
     </div>
 
     <div class="form-group">
-      <label>Дата ввода в эксплуатацию ТКО:</label>
-      <my-input v-model="localData.commissionDate" type="date" class="date-input" :max="today" min="1970-01-01" />
+      <label>Время работы устройства (в минутах):</label>
+      <my-input 
+      v-model="localData.commissionDate" 
+      type="number" 
+      min="0" 
+      max="99999999999999999999" 
+      step="1" 
+      placeholder="Время работы устройства (в минутах)..." />
     </div>
 
     <div class="form-group">
@@ -106,12 +112,18 @@
         // Инициализация формы при открытии (например, для редактирования)
         if (this.initialData && Object.keys(this.initialData).length > 0) {
         this.localData = { ...this.initialData };
+
+        if (this.localData.commissionDate) {
+          this.localData.commissionDate = this.parseUptimeToMinutes(this.localData.commissionDate);
+        }
       }
     },
   
     methods: {
       submitData() {
         if (!validateForm(this.$refs.manualInputForm)) return;
+
+        this.localData.commissionDate = this.parseCommissioningDays(this.localData.commissionDate);
 
         this.localData.interfacesValue = this.localData.interfaces.length;
         this.$emit('create', { ...this.localData });
@@ -148,6 +160,45 @@
       saveInterfaces(interfaces) {
         this.localData.interfaces = [ ...interfaces ];
         this.interfacesFormVisible = false;
+      },
+
+      // Парсер минут в вид дни, часы:минуты:секунды.доли
+      parseCommissioningDays(minutes) {
+        if (!minutes || isNaN(minutes)) return "";
+
+        const totalMinutes = parseInt(minutes, 10);
+        const days = Math.floor(totalMinutes / 1440);
+        const remainingAfterDays = totalMinutes % 1440;
+
+        const hours = Math.floor(remainingAfterDays / 60);
+        const mins = remainingAfterDays % 60;
+
+        let result = "";
+        if (days > 0) {
+          result += `${days} days, `;
+        }
+        
+        const pad = (n) => n.toString().padStart(2, '0');
+        result += `${pad(hours)}:${pad(mins)}:00.00`;
+
+        return result;
+      },
+
+      // Парсер в минуту
+      parseUptimeToMinutes(uptimeString) {
+        if (!uptimeString || typeof uptimeString !== 'string') return null;
+
+        // Пример строки: "2 days, 03:45:00.00" или "00:30:00.00"
+        const regex = /(?:(\d+)\s+days,\s+)?(\d{2}):(\d{2}):\d{2}(?:\.\d+)?/;
+
+        const match = uptimeString.match(regex);
+        if (!match) return null;
+
+        const days = parseInt(match[1] || '0', 10);   // либо число дней, либо 0
+        const hours = parseInt(match[2], 10);
+        const minutes = parseInt(match[3], 10);
+
+        return days * 1440 + hours * 60 + minutes;
       }
     }
   }
